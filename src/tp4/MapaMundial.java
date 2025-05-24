@@ -199,6 +199,25 @@ public class MapaMundial {
             india.agregarPaisesLimitrofes(china);
         }
         // LOS QUE SIGUEN NO LIMITAN CON NINGUNO DE MI LISTA, POR LO QUE NO LOS PONGO
+        // AFRICA !!!
+        // EGIPTO
+        if (egipto != null) {
+            egipto.agregarPaisesLimitrofes(null);
+        }
+        // NIGERIA
+        if (nigeria != null) {
+            nigeria.agregarPaisesLimitrofes(null);
+        }
+        // OCEANIA !!!
+        // AUSTRALIA
+        if (australia != null) {
+            australia.agregarPaisesLimitrofes(nuevaZelanda);
+        }
+        // NUEVA ZELANDA
+        if (nuevaZelanda != null) {
+            nuevaZelanda.agregarPaisesLimitrofes(australia);
+        }
+        
        
     }
     // Get paises por continente 

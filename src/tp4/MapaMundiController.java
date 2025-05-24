@@ -149,7 +149,7 @@ private void listaPaisesOrdenadosPorSuperficie() {
         }
 
         private void listarPaisesLimitrofes() { 
-            System.out.println("Ingrese el nombr del pais para ver sus limitrofes: ");
+            System.out.println("Ingrese el nombre del pais para ver sus limitrofes: ");
             String nombrePais = scanner.nextLine();
             Pais pais = mapaMundial.buscarPaisPorNombre(nombrePais);
             if(pais != null){
