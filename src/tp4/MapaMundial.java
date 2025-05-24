@@ -65,6 +65,24 @@ public class MapaMundial {
         oceania.agregarPais(nuevaZelanda);
         antartida.agregarPais(new Pais("Antártida", "No tiene", 14000000)); // Aunque no tenga habitantes ni provincia
 
+        paisesPorNombre.put(argentina.getNombre().toLowerCase(), argentina);
+        paisesPorNombre.put(uruguay.getNombre().toLowerCase(), uruguay);
+        paisesPorNombre.put(brasil.getNombre().toLowerCase(), brasil);
+        paisesPorNombre.put(chile.getNombre().toLowerCase(), chile);
+        paisesPorNombre.put(paraguay.getNombre().toLowerCase(), paraguay);
+        paisesPorNombre.put(bolivia.getNombre().toLowerCase(), bolivia);
+        paisesPorNombre.put(espana.getNombre().toLowerCase(), espana);
+        paisesPorNombre.put(francia.getNombre().toLowerCase(), francia);
+        paisesPorNombre.put(italia.getNombre().toLowerCase(), italia);
+        paisesPorNombre.put(portugal.getNombre().toLowerCase(), portugal);
+        paisesPorNombre.put(china.getNombre().toLowerCase(), china);
+        paisesPorNombre.put(india.getNombre().toLowerCase(), india);
+        paisesPorNombre.put(egipto.getNombre().toLowerCase(), egipto);
+        paisesPorNombre.put(nigeria.getNombre().toLowerCase(), nigeria);
+        paisesPorNombre.put(australia.getNombre().toLowerCase(), australia);
+        paisesPorNombre.put(nuevaZelanda.getNombre().toLowerCase(), nuevaZelanda);
+        paisesPorNombre.put(antartida.getNombre().toLowerCase(), new Pais("Antartida", "No tiene", 14000000)); // Aunque no tenga habitantes ni provincia
+
         //algunas provincias de prueba
         argentina.agregarProvincia(new Provincia("Entre Ríos"));
         argentina.agregarProvincia(new Provincia("Santa Fe"));
@@ -101,9 +119,20 @@ public class MapaMundial {
         Pais chile = buscarPaisPorNombre("Chile");
         Pais paraguay = buscarPaisPorNombre("Paraguay");
         Pais bolivia = buscarPaisPorNombre("Bolivia");
+        Pais espana = buscarPaisPorNombre("España");
+        Pais francia = buscarPaisPorNombre("Francia");
+        Pais italia = buscarPaisPorNombre("Italia");
+        Pais portugal = buscarPaisPorNombre("Portugal");
+        Pais china = buscarPaisPorNombre("China");
+        Pais india = buscarPaisPorNombre("India");
+        Pais egipto = buscarPaisPorNombre("Egipto");
+        Pais nigeria = buscarPaisPorNombre("Nigeria");
+        Pais australia = buscarPaisPorNombre("Australia");
+        Pais nuevaZelanda = buscarPaisPorNombre("Nueva Zelanda");
+
 
         // ahora defino las relaciones de paises limitrofes
-
+        // AMERICA !!!
         // ARGENTINA
         if (argentina != null) {
             argentina.agregarPaisesLimitrofes(brasil);
@@ -112,7 +141,6 @@ public class MapaMundial {
             argentina.agregarPaisesLimitrofes(chile);
             argentina.agregarPaisesLimitrofes(paraguay);
         }
-
         //BRASIL 
         if(brasil != null) {
             brasil.agregarPaisesLimitrofes(argentina);
@@ -120,33 +148,58 @@ public class MapaMundial {
             brasil.agregarPaisesLimitrofes(paraguay);
             brasil.agregarPaisesLimitrofes(uruguay);
         }
-
         // URUGUAY 
         if (uruguay != null) {
             uruguay.agregarPaisesLimitrofes(argentina);
             uruguay.agregarPaisesLimitrofes(brasil);
         }
-
         // PARAGUAY
-
         if (paraguay != null) {
             paraguay.agregarPaisesLimitrofes(argentina);
             paraguay.agregarPaisesLimitrofes(bolivia);
             paraguay.agregarPaisesLimitrofes(brasil);
         }
-
         // BOLIVIA
         if (bolivia != null) {
             bolivia.agregarPaisesLimitrofes(argentina);
             bolivia.agregarPaisesLimitrofes(paraguay);
             bolivia.agregarPaisesLimitrofes(brasil);
         }
-
         // CHILE 
         if (chile != null) {
             chile.agregarPaisesLimitrofes(argentina);
             chile.agregarPaisesLimitrofes(bolivia);
         }
+        // EUROPA !!!
+        // ESPAÑA
+        if (espana != null) {
+            espana.agregarPaisesLimitrofes(francia);
+            espana.agregarPaisesLimitrofes(portugal);
+        }
+        // FRANCIA
+        if (francia != null) {
+            francia.agregarPaisesLimitrofes(espana);
+            francia.agregarPaisesLimitrofes(italia);
+        }
+        // ITALIA
+        if (italia != null) {
+            italia.agregarPaisesLimitrofes(francia);
+        }
+        // PORTUGAL
+        if (portugal != null) {
+            portugal.agregarPaisesLimitrofes(espana);
+        }
+        // ASIA !!!
+        // CHINA
+        if (china != null) {
+            china.agregarPaisesLimitrofes(india);
+        }
+        // INDIA
+        if (india != null) {
+            india.agregarPaisesLimitrofes(china);
+        }
+        // LOS QUE SIGUEN NO LIMITAN CON NINGUNO DE MI LISTA, POR LO QUE NO LOS PONGO
+       
     }
     // Get paises por continente 
     public Set<Pais> getPaises(String nombreContinente){
@@ -178,14 +231,7 @@ public class MapaMundial {
     }
 
     public Pais buscarPaisPorNombre(String nombrePais) {
-        for (Continente continente : continentes) {
-            for (Pais pais : continente.getPaises()) {
-                if(pais.getNombre().equalsIgnoreCase(nombrePais)){
-                    return pais;
-                }
-            }
-        }
-        return null;
+        return paisesPorNombre.get(nombrePais.toLowerCase());
     }
     
 }

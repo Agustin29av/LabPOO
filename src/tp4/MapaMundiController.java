@@ -160,7 +160,7 @@ private void listaPaisesOrdenadosPorSuperficie() {
                         System.out.println("- " + limitrofe.getNombre());
                     }
             } else {
-                    System.out.println("El pais " + pais.getNombre() + " no tiene paises limitrofes.");
+                    System.out.println("El pais " + pais.getNombre() + " no tiene paises limitrofes registrados en esta lista.");
                     }
             }
         }
