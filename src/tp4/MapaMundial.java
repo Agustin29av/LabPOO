@@ -3,10 +3,13 @@ import java.util.*;
 
 public class MapaMundial {
     private Set<Continente> continentes;
+    private Map<String, Pais> paisesPorNombre;
 
     public MapaMundial(){
         continentes = new HashSet<>();
+        paisesPorNombre = new HashMap<>();
         inicializarDatos();
+        inicializarPaisesLimitrofes();
     }
     
     private void inicializarDatos(){
@@ -37,6 +40,12 @@ public class MapaMundial {
         Pais francia = new Pais("Francia", "París", 643000);
         Pais italia = new Pais("Italia", "Roma", 301000);
         Pais portugal = new Pais("Portugal", "Lisboa", 92200);
+        Pais china = new Pais("China", "Pekín", 9597000);
+        Pais india = new Pais("India", "Nueva Delhi", 3287000);
+        Pais egipto = new Pais("Egipto", "El Cairo", 1010000);
+        Pais nigeria = new Pais("Nigeria", "Abuya", 923000);
+        Pais australia = new Pais("Australia", "Canberra", 7682000);
+        Pais nuevaZelanda = new Pais("Nueva Zelanda", "Wellington", 270000);
    
         america.agregarPais(argentina);
         america.agregarPais(uruguay);
@@ -45,9 +54,16 @@ public class MapaMundial {
         america.agregarPais(paraguay);
         america.agregarPais(bolivia);
         europa.agregarPais(espana);
-        america.agregarPais(francia);
-        america.agregarPais(italia);
-        america.agregarPais(portugal);
+        europa.agregarPais(francia);
+        europa.agregarPais(italia);
+        europa.agregarPais(portugal);
+        asia.agregarPais(china);
+        asia.agregarPais(india);
+        africa.agregarPais(egipto);
+        africa.agregarPais(nigeria);
+        oceania.agregarPais(australia);
+        oceania.agregarPais(nuevaZelanda);
+        antartida.agregarPais(new Pais("Antártida", "No tiene", 14000000)); // Aunque no tenga habitantes ni provincia
 
         //algunas provincias de prueba
         argentina.agregarProvincia(new Provincia("Entre Ríos"));
@@ -58,22 +74,91 @@ public class MapaMundial {
         uruguay.agregarProvincia(new Provincia("Canelones"));
         uruguay.agregarProvincia(new Provincia("Montevideo"));
         brasil.agregarProvincia(new Provincia("Brasilia"));
+        brasil.agregarProvincia(new Provincia("São Paulo"));
         chile.agregarProvincia(new Provincia("Santiago"));
         paraguay.agregarProvincia(new Provincia("Asunción"));
+        paraguay.agregarProvincia(new Provincia("Central"));
         bolivia.agregarProvincia(new Provincia("La Paz"));
         espana.agregarProvincia(new Provincia("Madrid"));
+        espana.agregarProvincia(new Provincia("Barcelona"));
+        francia.agregarProvincia(new Provincia("Marsella"));
+        italia.agregarProvincia(new Provincia("Milán"));
+        portugal.agregarProvincia(new Provincia("Lisboa"));
+        china.agregarProvincia(new Provincia("Shanghái"));
+        india.agregarProvincia(new Provincia("Bombay"));
+        egipto.agregarProvincia(new Provincia("Alejandría"));
+        nigeria.agregarProvincia(new Provincia("Lagos"));
+        australia.agregarProvincia(new Provincia("Sídney"));
+        nuevaZelanda.agregarProvincia(new Provincia("Auckland"));
+    }
+
+    private void inicializarPaisesLimitrofes(){
+        // defino los paises
+
+        Pais argentina = buscarPaisPorNombre("Argentina");
+        Pais uruguay = buscarPaisPorNombre("Uruguay");
+        Pais brasil = buscarPaisPorNombre("Brasil");
+        Pais chile = buscarPaisPorNombre("Chile");
+        Pais paraguay = buscarPaisPorNombre("Paraguay");
+        Pais bolivia = buscarPaisPorNombre("Bolivia");
+
+        // ahora defino las relaciones de paises limitrofes
+
+        // ARGENTINA
+        if (argentina != null) {
+            argentina.agregarPaisesLimitrofes(brasil);
+            argentina.agregarPaisesLimitrofes(uruguay);
+            argentina.agregarPaisesLimitrofes(bolivia);
+            argentina.agregarPaisesLimitrofes(chile);
+            argentina.agregarPaisesLimitrofes(paraguay);
+        }
+
+        //BRASIL 
+        if(brasil != null) {
+            brasil.agregarPaisesLimitrofes(argentina);
+            brasil.agregarPaisesLimitrofes(bolivia);
+            brasil.agregarPaisesLimitrofes(paraguay);
+            brasil.agregarPaisesLimitrofes(uruguay);
+        }
+
+        // URUGUAY 
+        if (uruguay != null) {
+            uruguay.agregarPaisesLimitrofes(argentina);
+            uruguay.agregarPaisesLimitrofes(brasil);
+        }
+
+        // PARAGUAY
+
+        if (paraguay != null) {
+            paraguay.agregarPaisesLimitrofes(argentina);
+            paraguay.agregarPaisesLimitrofes(bolivia);
+            paraguay.agregarPaisesLimitrofes(brasil);
+        }
+
+        // BOLIVIA
+        if (bolivia != null) {
+            bolivia.agregarPaisesLimitrofes(argentina);
+            bolivia.agregarPaisesLimitrofes(paraguay);
+            bolivia.agregarPaisesLimitrofes(brasil);
+        }
+
+        // CHILE 
+        if (chile != null) {
+            chile.agregarPaisesLimitrofes(argentina);
+            chile.agregarPaisesLimitrofes(bolivia);
+        }
     }
     // Get paises por continente 
-    private Set<Pais> getPaises(String nombreContinente){
+    public Set<Pais> getPaises(String nombreContinente){
         for (Continente c : continentes){
             if (c.getNombre().equalsIgnoreCase(nombreContinente)){
                 return c.getPaises();
             }
         }
-        return new HashSet<>();
+        return new HashSet<>(); // devuelvo un conjunto vacio de paises para evitar que retorne null
     }
     // Get provincias por pais
-    private Set<Provincia> getProvincias(String nombrePais){
+    public Set<Provincia> getProvincias(String nombrePais){
         for (Continente c : continentes){
             for (Pais p : c.getPaises()){
                 if (p.getNombre().equalsIgnoreCase(nombrePais)){
@@ -83,4 +168,25 @@ public class MapaMundial {
         }
         return new HashSet<>();
     }
+
+    public Set<Pais> getTodolosPaises() {
+        Set<Pais> todosLosPaises = new HashSet<>();
+        for (Continente continente : continentes) {
+            todosLosPaises.addAll(continente.getPaises());
+        }
+        return todosLosPaises;
+    }
+
+    public Pais buscarPaisPorNombre(String nombrePais) {
+        for (Continente continente : continentes) {
+            for (Pais pais : continente.getPaises()) {
+                if(pais.getNombre().equalsIgnoreCase(nombrePais)){
+                    return pais;
+                }
+            }
+        }
+        return null;
+    }
+    
 }
+
