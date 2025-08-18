@@ -1,4 +1,4 @@
-package src.tp3.exercise5;
+package tp3.exercise5;
 public class Exercise5 {
 
     // The Integer class must be static to be used from main

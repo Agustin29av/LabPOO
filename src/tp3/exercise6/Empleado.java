@@ -1,4 +1,4 @@
-package src.tp3.exercise6;
+package tp3.exercise6;
    
     public class Empleado {
         private String nombre;

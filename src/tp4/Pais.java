@@ -1,4 +1,4 @@
-package src.tp4;
+package tp4;
 
 import java.util.HashSet;
 import java.util.Set;

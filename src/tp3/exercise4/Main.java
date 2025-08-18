@@ -1,9 +1,9 @@
-package src.tp3.exercise4;
+package tp3.exercise4;
 
 import java.util.Arrays;
 import java.util.Scanner;
 
-import src.tp3.exercise4.Exercise4.IntegerArray;
+import tp3.exercise4.Exercise4.IntegerArray;
 
 public class Main {
      public static void main(String[] args) {

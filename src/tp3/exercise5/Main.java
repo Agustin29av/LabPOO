@@ -1,8 +1,8 @@
-package src.tp3.exercise5;
+package tp3.exercise5;
 
 import java.util.Scanner;
 
-import src.tp3.exercise5.Exercise5.IntegerNumber;
+import tp3.exercise5.Exercise5.IntegerNumber;
 
 public class Main {
     public static void main(String[] args) {

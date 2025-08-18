@@ -1,4 +1,4 @@
-package src.tp4;
+package tp4;
 
 public class Provincia {
     private String nombre;

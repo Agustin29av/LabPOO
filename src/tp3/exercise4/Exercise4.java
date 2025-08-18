@@ -1,4 +1,4 @@
-package src.tp3.exercise4;
+package tp3.exercise4;
 import java.util.Arrays;
 
 public class Exercise4 {

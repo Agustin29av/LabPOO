@@ -1,4 +1,4 @@
-package src.tp3.exercise6;
+package tp3.exercise6;
 import java.util.ArrayList;
 
 public class gestionEmpleados {
