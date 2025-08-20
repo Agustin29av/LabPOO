@@ -1,4 +1,4 @@
-package src.tp3.exercise1;
+package tp3.exercise1;
 import java.util.Scanner;
 
 public class Exercise1{

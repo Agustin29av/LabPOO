@@ -1,4 +1,4 @@
-package src.tp4;
+package tp4;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.Comparator;
